@@ -1,11 +1,10 @@
 import java.util.Scanner;
-import java.util.*;
 
 public class ProductActions {
 
     static Scanner read = new Scanner(System.in);
     int numChoiceMenu, numChoiceGroup; 
-    String name; String specs; String gaming;
+    String name, specs, gaming;
     public void menuElements() {
         System.out.println("Выберите группу товара:");
         System.out.println("1. Готовые ПК"); // PC 
@@ -94,16 +93,16 @@ public class ProductActions {
 
         }
     }
-public void parametersInput() {
-    String name = read.nextLine();
-    System.out.println("Введите название товара: ");
+    public void parametersInput() {
+        String name = read.nextLine();
+        System.out.println("Введите название товара: ");
 
-    String specs = read.nextLine(); 
-    System.out.println("Введите параметры товара: ");
-      
-    System.out.println("Игровой товар?: ");
-    String gamingToString = read.nextLine();
-}
+        String specs = read.nextLine(); 
+        System.out.println("Введите параметры товара: ");
+        
+        System.out.println("Игровой товар?: ");
+        String gamingToString = read.nextLine();
+    }
     public void addPC() {
         parametersInput();
         PC pc = new PC(name, specs, gaming);
