@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.*;
 
-public class doAnimals {
+public class ProductActions {
 
     static Scanner read = new Scanner(System.in);
     int numChoiceMenu, numChoiceGroup; 
@@ -11,7 +11,7 @@ public class doAnimals {
         System.out.println("1. Готовые ПК"); // PC 
         System.out.println("2. Клавиатуры и мыши"); // KeyboardMouse
         System.out.println("3. Аксессуары"); // Accessories
-        System.out.println("4. Мониторы"); // screen
+        System.out.println("4. Мониторы"); // Screens
         System.out.println("5. Запчасти и расходники для периферии"); // SpareParts
     }
     
@@ -32,12 +32,12 @@ public class doAnimals {
                 menuElements(); numChoiceGroup = read.nextInt();
                 switch (numChoiceGroup) {
                     
-                    case 1: { addPC(); break;     }
-                    case 2: { addKeyboardMouse(); break;   }
-                    case 3: { addAccessories(); break;  }
-                    case 4: { addScreen(); break;}
-                    case 5: { addspareParts(); break;     }
-                    default:{ break;                }
+                    case 1: { addPC(); break;             }
+                    case 2: { addKeyboardMouse(); break;  }
+                    case 3: { addAccessories(); break;    }
+                    case 4: { addScreen(); break;         }
+                    case 5: { addSpareParts(); break;     }
+                    default:{ break;                      }
                     
                 }
                 mainMenu();
@@ -47,12 +47,12 @@ public class doAnimals {
             menuElements(); numChoiceGroup = read.nextInt();
                 switch (numChoiceGroup) {
                     
-                    case 1: { removePC(); break;     }
-                    case 2: { removeKeyboardMouse(); break;   }
-                    case 3: { removeAccessories(); break;  }
-                    case 4: { removeScreen(); break;}
-                    case 5: { removespareParts(); break;     }
-                    default:{ break;                   }
+                    case 1: { removePC(); break;             }
+                    case 2: { removeKeyboardMouse(); break;  }
+                    case 3: { removeAccessories(); break;    }
+                    case 4: { removeScreen(); break;         }
+                    case 5: { removeSpareParts(); break;     }
+                    default:{ break;                         }
 
                 }
                 mainMenu();
@@ -62,12 +62,12 @@ public class doAnimals {
             menuElements();  numChoiceGroup = read.nextInt();
                 switch (numChoiceGroup) {
 
-                    case 1: { changePC(); break;     }
-                    case 2: { changeKeyboardMouse(); break;   }
-                    case 3: { changeAccessories(); break;  }
-                    case 4: { changeScreen(); break;}
-                    case 5: { changespareParts(); break;     }
-                    default:{ break;                   }
+                    case 1: { changePC(); break;             }
+                    case 2: { changeKeyboardMouse(); break;  }
+                    case 3: { changeAccessories(); break;    }
+                    case 4: { changeScreen(); break;         }
+                    case 5: { changeSpareParts(); break;     }
+                    default:{ break;                         }
 
                 }
                 mainMenu();
@@ -76,12 +76,12 @@ public class doAnimals {
             menuElements(); numChoiceGroup = read.nextInt();
                 switch (numChoiceGroup) {
 
-                    case 1: { displayPC(); break;     }
+                    case 1: { displayPC(); break;              }
                     case 2: { displayKeyboardMouse(); break;   }
-                    case 3: { displayAccessories(); break;  }
-                    case 4: { displayScreen(); break;}
-                    case 5: { displayspareParts(); break;     }
-                    default:{ break;                    } 
+                    case 3: { displayAccessories(); break;     }
+                    case 4: { displayScreen(); break;          }
+                    case 5: { displaySpareParts(); break;      }
+                    default:{ break;                           } 
 
                 }
                 mainMenu();
@@ -98,9 +98,9 @@ public void parametersInput() {
     String name = read.nextLine();
     System.out.println("Введите название товара: ");
 
+    String specs = read.nextLine(); 
     System.out.println("Введите параметры товара: ");
-    String specs = read.nextLine();
-    
+      
     System.out.println("Игровой товар?: ");
     String gamingToString = read.nextLine();
 }
@@ -129,18 +129,18 @@ public void parametersInput() {
         parametersInput();
         Screen Screen = new Screen(name, specs, gaming);
         Screen.Screens.add(Screen);
-        System.out.println("Добавлено земноводное (амфибия) с параметрами:\n" + Screen);
+        System.out.println("Добавлен монитор:\n" + Screen);
     }
 
-    public void addspareParts() {
+    public void addSpareParts() {
         parametersInput();
         SpareParts SpareParts = new SpareParts(name, specs, gaming);
         SpareParts.spareParts.add(SpareParts);
-        System.out.println("Добавлена рыба с параметрами:\n" + SpareParts);
+        System.out.println("Добавлена запчасть или расходник:\n" + SpareParts);
     }
     
     public void removePC() {
-        System.out.println("| Удаление ПК из БД |\n");
+        System.out.println("| Удаление ПК |\n");
         parametersInput();
         for (PC obj : PC.pcs) {
             if (obj.getName() == name && obj.getSpecs() == specs && obj.getGaming() == gaming) {
@@ -155,178 +155,173 @@ public void parametersInput() {
 
     public void removeKeyboardMouse() {
         read.nextLine();
-        System.out.println("!!! Удаление млекопитающего !!!");
+        System.out.println("| Удаление клавиатуры или мыши |");
         parametersInput();
         read.skip("");
         for (KeyboardMouse obj : KeyboardMouse.KeyboardMouses) {
             if (obj.getName() == name && obj.getSpecs() == specs && obj.getGaming() == gaming) {
 
-                System.out.println("Удалено млекопитающее с параметрами:" + obj);
+                System.out.println("Удалена клавиатура или мышь:" + obj);
                 KeyboardMouse.KeyboardMouses.remove(obj);
                 break;
             }
-            else System.out.println("Такое млекопитающее не найдено");
+            else System.out.println("Товар не найден");
         }
         
     }
 
     public void removeAccessories() {
         read.nextLine();
-        boolean exists = false;
-        System.out.println("!!! Удаление пресмыкающегося (рептилии) !!!");
+        
+        System.out.println("| Удаление аксессуара |");
         parametersInput();
         read.skip("");
         for (Accessories obj : Accessories.Accessoriess) {
             if (obj.getName() == name && obj.getSpecs() == specs && obj.getGaming() == gaming) {
-                exists = true;
-                System.out.println("Удалено пресмыкающееся (рептилия) с параметрами:" + obj);
+                
+                System.out.println("Удалён аксессуар:" + obj);
                 Accessories.Accessoriess.remove(obj);
                 break;
             }
+            else System.out.println("Товар не найден");
         }
-        if (!exists) System.out.println("Такое пресмыкающееся (рептилия) не найдено");
     }
 
     public void removeScreen() {
         read.nextLine();
-        boolean exists = false;
-        System.out.println("!!! Удаление земноводного (амфибии) !!!");
+        
+        System.out.println("| Удаление монитора |");
         parametersInput();
         read.skip("");
         for (Screen obj : Screen.Screens) {
             if (obj.getName() == name && obj.getSpecs() == specs && obj.getGaming() == gaming) {
-                exists = true;
-                System.out.println("Удалено земноводное (амфибия) с параметрами:" + obj);
+                
+                System.out.println("Удалён монитор:" + obj);
                 Screen.Screens.remove(obj);
                 break;
             }
+            else System.out.println("Товар не найден");
         }
-        if (!exists) System.out.println("Такое земноводное (амфибия) не найдено");
     }
 
-    public void removespareParts() {
+    public void removeSpareParts() {
         read.nextLine();
-        boolean exists = false;
-        System.out.println("!!! Удаление рыбы !!!");
+        
+        System.out.println("| Удаление запчастей или расходников ");
         parametersInput();
         read.skip("");
         for (SpareParts obj : SpareParts.spareParts) {
             if (obj.getName() == name && obj.getSpecs() == specs && obj.getGaming() == gaming) {
-                exists = true;
-                System.out.println("Удалена рыба с параметрами:" + obj);
+                
+                System.out.println("Удалена запчасть или расходник:" + obj);
                 SpareParts.spareParts.remove(obj);
                 break;
             }
+            else System.out.println("Товар не найден");
         }
-        if (!exists) System.out.println("Такая рыба не найдена");
     }
 
     public void changePC() {
         read.nextLine();
-        boolean exists = false;
+        
         parametersInput();
         for (PC obj : PC.pcs) {
             if (obj.getName() == name && obj.getSpecs() == specs && obj.getGaming() == gaming) {
-                exists = true;
-                System.out.println("Введите желаемое название птицы: ");
+                
+                System.out.println("Введите новое название товара: ");
                 obj.setName(read.nextLine());
-                System.out.println("Введите желаемый размер птицы: ");
+                System.out.println("Введите новые параметры товара: ");
                 obj.setSpecs(read.nextLine());
-                System.out.println("Введите желаемую хищность птицы (да/нет): ");
+                System.out.println("Игровой товар?: ");
                 obj.setGamingToString(read.nextLine());
-                System.out.println("Параметры птицы изменены на: " + obj);
+                System.out.println("Товар изменён: " + obj);
                 break;
             }
+            else System.out.println("Товар не найден");
         }
-        if (!exists) System.out.println("Такая птица не найдена");
     }
 
     public void changeKeyboardMouse() {
         read.nextLine();
-        boolean exists = false;
+        
         parametersInput();
         String gaming = read.nextLine();
         for (KeyboardMouse obj : KeyboardMouse.KeyboardMouses) {
             if (obj.getName() == name && obj.getSpecs() == specs && obj.getGaming() == gaming) {
-                exists = true;
-                System.out.println("Введите желаемое название млекопитающего: ");
+                
+                System.out.println("Введите новое название товара: ");
                 obj.setName(read.nextLine());
-                System.out.println("Введите желаемый размер млекопитающего: ");
+                System.out.println("Введите новые параметры товара: ");
                 obj.setSpecs(read.nextLine());
-                System.out.println("Введите желаемую хищность млекопитающего (да/нет): ");
+                System.out.println("Игровой товар?: ");
                 obj.setGamingToString(read.nextLine());
-                System.out.println("Параметры млекопитающего изменены на: " + obj);
+                System.out.println("Товар изменён: " + obj);
                 break;
             }
+            else System.out.println("Товар не найден");
         }
-        if (!exists) System.out.println("Такое млекопитающее не найдено");
     }
 
     public void changeAccessories() {
         read.nextLine();
-        boolean exists = false;
         parametersInput();
         String gaming = read.nextLine();
         for (Accessories obj : Accessories.Accessoriess) {
             if (obj.getName() == name && obj.getSpecs() == specs && obj.getGaming() == gaming) {
-                exists = true;
-                System.out.println("Введите желаемое название пресмыкающегося (рептилии): ");
+                System.out.println("Введите новое название товара: ");
                 obj.setName(read.nextLine());
-                System.out.println("Введите желаемый размер пресмыкающегося (рептилии): ");
+                System.out.println("Введите новые параметры товара: ");
                 obj.setSpecs(read.nextLine());
-                System.out.println("Введите желаемую хищность пресмыкающегося (рептилии) (да/нет): ");
+                System.out.println("Игровой товар?: ");
                 obj.setGamingToString(read.nextLine());
-                System.out.println("Параметры пресмыкающегося (рептилии) изменены на: " + obj);
+                System.out.println("Товар изменён: " + obj);
                 break;
             }
+            else System.out.println("Товар не найден");
         }
-        if (!exists) System.out.println("Такое пресмыкающееся (рептилия) не найдено");
     }
 
     public void changeScreen() {
         read.nextLine();
-        boolean exists = false;
         parametersInput();
         String gaming = read.nextLine();
         for (Screen obj : Screen.Screens) {
             if (obj.getName() == name && obj.getSpecs() == specs && obj.getGaming() == gaming) {
-                exists = true;
-                System.out.println("Введите желаемое название земноводного (амфибии): ");
+                System.out.println("Введите новое название товара: ");
                 obj.setName(read.nextLine());
-                System.out.println("Введите желаемый размер земноводного (амфибии): ");
+                System.out.println("Введите новые параметры товара: ");
                 obj.setSpecs(read.nextLine());
-                System.out.println("Введите желаемую хищность земноводного (амфибии) (да/нет): ");
+                System.out.println("Игровой товар?: ");
                 obj.setGamingToString(read.nextLine());
-                System.out.println("Параметры земноводного (амфибии) изменены на: " + obj);
+                System.out.println("Товар изменён: " + obj);
                 break;
             }
+            else System.out.println("Товар не найден");
         }
-        if (!exists) System.out.println("Такаое земноводное (амфибия) не найдено");
     }
 
-    public void changespareParts() {
-        read.nextLine();
-        boolean exists = false;
+    public void changeSpareParts() {
+        read.nextLine();  
         parametersInput();
         String gaming = read.nextLine();
         for (SpareParts obj : SpareParts.spareParts) {
             if (obj.getName() == name && obj.getSpecs() == specs && obj.getGaming() == gaming) {
-                exists = true;
-                System.out.println("Введите желаемое название рыбы: ");
+                System.out.println("Введите новое название товара: ");
                 obj.setName(read.nextLine());
-                System.out.println("Введите желаемый размер рыбы: ");
+                System.out.println("Введите новые параметры товара: ");
                 obj.setSpecs(read.nextLine());
-                System.out.println("Введите желаемую хищность рыбы (да/нет): ");
+                System.out.println("Игровой товар?: ");
                 obj.setGamingToString(read.nextLine());
-                System.out.println("Параметры рыбы изменены на: " + obj);
+                System.out.println("Товар изменён: " + obj);
                 break;
             }
+            else System.out.println("Товар не найден");
         }
-        if (!exists) System.out.println("Такая рыба не найдена");
+        
     }
 
     public void displayPC() {
-        System.out.println("Птицы: ");
+        System.out.println("Готовые ПК: ");
         for (PC obj : PC.pcs) {
             System.out.println(obj);
         }
@@ -334,7 +329,7 @@ public void parametersInput() {
     }
 
     public void displayKeyboardMouse() {
-        System.out.println("Млекопитающие: ");
+        System.out.println("Клавиатуры и мыши: ");
         for (KeyboardMouse obj : KeyboardMouse.KeyboardMouses) {
             System.out.println(obj);
         }
@@ -342,7 +337,7 @@ public void parametersInput() {
     }
 
     public void displayAccessories() {
-        System.out.println("Пресмыкающиеся (рептилии): ");
+        System.out.println("Аксессуары: ");
         for (Accessories obj : Accessories.Accessoriess) {
             System.out.println(obj);
         }
@@ -350,15 +345,15 @@ public void parametersInput() {
     }
 
     public void displayScreen() {
-        System.out.println("Земноводные (амфибии): ");
+        System.out.println("Мониторы: ");
         for (Screen obj : Screen.Screens) {
             System.out.println(obj);
         }
         if (Screen.Screens.isEmpty()) System.out.println("Отсутствуют");
     }
 
-    public void displayspareParts() {
-        System.out.println("Рыбы: ");
+    public void displaySpareParts() {
+        System.out.println("Запчасти и расходники: ");
         for (SpareParts obj : SpareParts.spareParts) {
             System.out.println(obj);
         }
@@ -366,11 +361,11 @@ public void parametersInput() {
     }
 
     public void displayAll() {
-        System.out.println("Вывод всех животных: ");
+        System.out.println("Все товары: ");
         displayPC();
         displayKeyboardMouse();
         displayAccessories();
         displayScreen();
-        displayspareParts();
+        displaySpareParts();
     }
 }

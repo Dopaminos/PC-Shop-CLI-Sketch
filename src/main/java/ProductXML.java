@@ -9,10 +9,10 @@ public class ProductXML {
 
     @XmlElementWrapper
     @XmlElement
-    public List<Object> allAnimals = new ArrayList<>();
+    public List<Object> allProducts = new ArrayList<>();
 
     @Override
     public String toString() {
-        return "ProductXML {" + "allAnimals = " + allAnimals + '}';
+        return "ProductXML {" + "allProducts = " + allProducts + '}';
     }
 }

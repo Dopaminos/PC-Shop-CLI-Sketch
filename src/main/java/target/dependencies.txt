@@ -1,0 +1,10 @@
+digraph "groupId:courseWork:jar:1.0-SNAPSHOT" { 
+	"groupId:courseWork:jar:1.0-SNAPSHOT" -> "junit:junit:jar:3.8.1:test" ; 
+	"groupId:courseWork:jar:1.0-SNAPSHOT" -> "javax.xml.bind:jaxb-api:jar:2.4.0-b180830.0359:compile" ; 
+	"groupId:courseWork:jar:1.0-SNAPSHOT" -> "org.glassfish.jaxb:jaxb-runtime:jar:2.4.0-b180830.0438:compile" ; 
+	"javax.xml.bind:jaxb-api:jar:2.4.0-b180830.0359:compile" -> "javax.activation:javax.activation-api:jar:1.2.0:compile" ; 
+	"org.glassfish.jaxb:jaxb-runtime:jar:2.4.0-b180830.0438:compile" -> "org.glassfish.jaxb:txw2:jar:2.4.0-b180830.0438:compile" ; 
+	"org.glassfish.jaxb:jaxb-runtime:jar:2.4.0-b180830.0438:compile" -> "com.sun.istack:istack-commons-runtime:jar:3.0.7:compile" ; 
+	"org.glassfish.jaxb:jaxb-runtime:jar:2.4.0-b180830.0438:compile" -> "org.jvnet.staxex:stax-ex:jar:1.8:compile" ; 
+	"org.glassfish.jaxb:jaxb-runtime:jar:2.4.0-b180830.0438:compile" -> "com.sun.xml.fastinfoset:FastInfoset:jar:1.2.15:compile" ; 
+ } 
