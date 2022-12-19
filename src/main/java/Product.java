@@ -6,34 +6,22 @@ public abstract class Product {
     static Scanner read = new Scanner(System.in);
     private String name;
     private String specs;
-    public boolean gaming;
+    private boolean gaming;
     private String gamingToString;
 
     public Product(String name, String specs, String gamingToString) {
         this.name = name;
         this.specs = specs;
         this.gamingToString = gamingToString;
-        try {
 
-            if (gamingToString == "Да" || gamingToString == ("да"))
-                this.gaming = true;
-
-            else if (gamingToString == "Нет" || gamingToString == "нет")
-                this.gaming = false;
-
-            else
-                throw new IllegalArgumentException(
-                        "Параметр 'Игровой' введён неверно\nИзмените его с помощью команды меню №3");
-
-        } catch (IllegalArgumentException e) {
-        }
+        setGamingToString(gamingToString);
     }
 
     public Product() {
         this.name = "";
         this.specs = "";
         this.gaming = false;
-        this.gamingToString = "Нет";
+        this.gamingToString = "no";
     }
 
     @XmlElement
@@ -60,31 +48,21 @@ public abstract class Product {
     }
 
     public void setGamingToString(String gamingToString) throws IllegalArgumentException {
-        try {
+        if (gamingToString.toLowerCase().equals("yes"))
+            this.gaming = true;
 
-            if (gamingToString == "Да" || gamingToString == ("да"))
-                this.gaming = true;
+        else if (gamingToString.toLowerCase().equals("no"))
+            this.gaming = false;
 
-            else if (gamingToString.equals("Нет") || gamingToString.equals("нет"))
-                this.gaming = false;
-
-            else
-                throw new IllegalArgumentException(
-                        "Параметр 'Игровой' введён неверно\nИзмените его с помощью команды меню №3");
-
-        } catch (IllegalArgumentException e) {
-            setGamingToString(read.nextLine());
-        }
-
+        else
+            throw new IllegalArgumentException(
+                    "Параметр 'Игровой' введён неверно\nИзмените его с помощью команды меню №3");
     }
 
     public void productException(String name, String[] brandList) {
-        try {
-            if (Arrays.stream(brandList).anyMatch(name::contains)) {
-                throw new IllegalArgumentException(
-                        "Товар или его характеристики введены неверно, попробуйте ещё раз с помощью команды меню №3");
-            }
-        } catch (IllegalArgumentException e) {
+        if (!Arrays.stream(brandList).anyMatch(name::contains)) {
+            throw new IllegalArgumentException(
+                    "Товар или его характеристики введены неверно, попробуйте ещё раз с помощью команды меню №3");
         }
 
     };
@@ -105,7 +83,7 @@ class PC extends Product {
     // Конструктор с параметрами
     public PC(String name, String specs, String gaming) {
         super(name, specs, gaming);
-        productException(specs, pcBrandList);
+        productException(name, pcBrandList);
     }
 
     // Конструктор без параметров

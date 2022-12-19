@@ -5,6 +5,7 @@ public class ProductActions {
     static Scanner read = new Scanner(System.in);
     int numChoiceMenu, numChoiceGroup; 
     String name, specs, gaming;
+
     public void menuElements() {
         System.out.println("Выберите группу товара:");
         System.out.println("1. Готовые ПК"); // PC 
@@ -24,85 +25,100 @@ public class ProductActions {
         System.out.println("5. Сохранить данные в XML");
         System.out.println("6. Получить данные из XML");
         System.out.println("7. Завершить работу c меню");
+
         numChoiceMenu = read.nextInt();
-        switch (numChoiceMenu) {
-            //Добавление
-            case 1:
-                menuElements(); numChoiceGroup = read.nextInt();
-                switch (numChoiceGroup) {
-                    
-                    case 1: { addPC(); break;             }
-                    case 2: { addKeyboardMouse(); break;  }
-                    case 3: { addAccessories(); break;    }
-                    case 4: { addScreen(); break;         }
-                    case 5: { addSpareParts(); break;     }
-                    default:{ break;                      }
-                    
-                }
-                mainMenu();
-                break;
-            //Удаление
-            case 2:
-            menuElements(); numChoiceGroup = read.nextInt();
-                switch (numChoiceGroup) {
-                    
-                    case 1: { removePC(); break;             }
-                    case 2: { removeKeyboardMouse(); break;  }
-                    case 3: { removeAccessories(); break;    }
-                    case 4: { removeScreen(); break;         }
-                    case 5: { removeSpareParts(); break;     }
-                    default:{ break;                         }
-
-                }
-                mainMenu();
-                break;
-            //Изменение параметров
-            case 3:
-            menuElements();  numChoiceGroup = read.nextInt();
-                switch (numChoiceGroup) {
-
-                    case 1: { changePC(); break;             }
-                    case 2: { changeKeyboardMouse(); break;  }
-                    case 3: { changeAccessories(); break;    }
-                    case 4: { changeScreen(); break;         }
-                    case 5: { changeSpareParts(); break;     }
-                    default:{ break;                         }
-
-                }
-                mainMenu();
-                break;
-            case 4:
-            menuElements(); numChoiceGroup = read.nextInt();
-                switch (numChoiceGroup) {
-
-                    case 1: { displayPC(); break;              }
-                    case 2: { displayKeyboardMouse(); break;   }
-                    case 3: { displayAccessories(); break;     }
-                    case 4: { displayScreen(); break;          }
-                    case 5: { displaySpareParts(); break;      }
-                    default:{ break;                           } 
-
-                }
-                mainMenu();
-                break;
-
-            case 5: { Main.writeToXML(); mainMenu(); break; }
-            case 6: { Main.readFromXML(); mainMenu(); break;                   }
-            case 7: { System.out.println("Работа с меню завершена"); break; }
-            default: { mainMenu(); break;}
-
+        
+        try {
+            switch (numChoiceMenu) {
+                //Добавление
+                case 1:
+                    menuElements(); 
+                    numChoiceGroup = read.nextInt();
+                    read.nextLine();
+                    switch (numChoiceGroup) {
+                        
+                        case 1: { addPC(); break;             }
+                        case 2: { addKeyboardMouse(); break;  }
+                        case 3: { addAccessories(); break;    }
+                        case 4: { addScreen(); break;         }
+                        case 5: { addSpareParts(); break;     }
+                        default:{ break;                      }
+                        
+                    }
+                    mainMenu();
+                    break;
+                //Удаление
+                case 2:
+                menuElements(); 
+                numChoiceGroup = read.nextInt();
+                read.nextLine();
+                    switch (numChoiceGroup) {
+                        
+                        case 1: { removePC(); break;             }
+                        case 2: { removeKeyboardMouse(); break;  }
+                        case 3: { removeAccessories(); break;    }
+                        case 4: { removeScreen(); break;         }
+                        case 5: { removeSpareParts(); break;     }
+                        default:{ break;                         }
+    
+                    }
+                    mainMenu();
+                    break;
+                //Изменение параметров
+                case 3:
+                menuElements();  
+                numChoiceGroup = read.nextInt();
+                    switch (numChoiceGroup) {
+    
+                        case 1: { changePC(); break;             }
+                        case 2: { changeKeyboardMouse(); break;  }
+                        case 3: { changeAccessories(); break;    }
+                        case 4: { changeScreen(); break;         }
+                        case 5: { changeSpareParts(); break;     }
+                        default:{ break;                         }
+    
+                    }
+                    mainMenu();
+                    break;
+                case 4:
+                menuElements(); 
+                numChoiceGroup = read.nextInt();
+                read.nextLine();
+                    switch (numChoiceGroup) {
+    
+                        case 1: { displayPC(); break;              }
+                        case 2: { displayKeyboardMouse(); break;   }
+                        case 3: { displayAccessories(); break;     }
+                        case 4: { displayScreen(); break;          }
+                        case 5: { displaySpareParts(); break;      }
+                        default:{ break;                           } 
+    
+                    }
+                    mainMenu();
+                    break;
+    
+                case 5: { Main.writeToXML(); mainMenu(); break; }
+                case 6: { Main.readFromXML(); mainMenu(); break;                   }
+                case 7: { System.out.println("Работа с меню завершена"); break; }
+                default: { mainMenu(); break;}
+            }   
+        }
+        catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            mainMenu();
         }
     }
     public void parametersInput() {
-        String name = read.nextLine();
-        System.out.println("Введите название товара: ");
+        System.out.print("Введите название товара: ");
+        name = read.nextLine();
 
-        String specs = read.nextLine(); 
-        System.out.println("Введите параметры товара: ");
+        System.out.print("Введите параметры товара: ");
+        specs = read.nextLine(); 
         
-        System.out.println("Игровой товар?: ");
-        String gamingToString = read.nextLine();
+        System.out.print("Игровой товар?: ");
+        gaming = read.nextLine();
     }
+
     public void addPC() {
         parametersInput();
         PC pc = new PC(name, specs, gaming);
@@ -112,37 +128,37 @@ public class ProductActions {
 
     public void addKeyboardMouse() {
         parametersInput();
-        KeyboardMouse KeyboardMouse = new KeyboardMouse(name, specs, gaming);
-        KeyboardMouse.KeyboardMouses.add(KeyboardMouse);
-        System.out.println("Добавлена клавиатура или мышь: " + KeyboardMouse);
+        KeyboardMouse keyboardMouse = new KeyboardMouse(name, specs, gaming);
+        KeyboardMouse.KeyboardMouses.add(keyboardMouse);
+        System.out.println("Добавлена клавиатура или мышь: " + keyboardMouse);
     }
 
     public void addAccessories() {
         parametersInput();
-        Accessories Accessories = new Accessories(name, specs, gaming);
-        Accessories.Accessoriess.add(Accessories);
-        System.out.println("Добавлен аксессуар: " + Accessories);
+        Accessories accessories = new Accessories(name, specs, gaming);
+        Accessories.Accessoriess.add(accessories);
+        System.out.println("Добавлен аксессуар: " + accessories);
     }
 
     public void addScreen() {
         parametersInput();
-        Screen Screen = new Screen(name, specs, gaming);
-        Screen.Screens.add(Screen);
-        System.out.println("Добавлен монитор:\n" + Screen);
+        Screen screen = new Screen(name, specs, gaming);
+        Screen.Screens.add(screen);
+        System.out.println("Добавлен монитор:\n" + screen);
     }
 
     public void addSpareParts() {
         parametersInput();
-        SpareParts SpareParts = new SpareParts(name, specs, gaming);
-        SpareParts.spareParts.add(SpareParts);
-        System.out.println("Добавлена запчасть или расходник:\n" + SpareParts);
+        SpareParts spareParts = new SpareParts(name, specs, gaming);
+        SpareParts.spareParts.add(spareParts);
+        System.out.println("Добавлена запчасть или расходник:\n" + spareParts);
     }
     
     public void removePC() {
         System.out.println("| Удаление ПК |\n");
         parametersInput();
         for (PC obj : PC.pcs) {
-            if (obj.getName() == name && obj.getSpecs() == specs && obj.getGaming() == gaming) {
+            if (obj.getName().equals(name) && obj.getSpecs().equals(specs) && obj.getGaming().equals(gaming)) {
                 System.out.println("Удалён ПК:" + obj);
                 PC.pcs.remove(obj);
                 break;
@@ -158,7 +174,7 @@ public class ProductActions {
         parametersInput();
         read.skip("");
         for (KeyboardMouse obj : KeyboardMouse.KeyboardMouses) {
-            if (obj.getName() == name && obj.getSpecs() == specs && obj.getGaming() == gaming) {
+            if (obj.getName().equals(name) && obj.getSpecs().equals(specs) && obj.getGaming().equals(gaming)) {
 
                 System.out.println("Удалена клавиатура или мышь:" + obj);
                 KeyboardMouse.KeyboardMouses.remove(obj);
@@ -176,7 +192,7 @@ public class ProductActions {
         parametersInput();
         read.skip("");
         for (Accessories obj : Accessories.Accessoriess) {
-            if (obj.getName() == name && obj.getSpecs() == specs && obj.getGaming() == gaming) {
+            if (obj.getName().equals(name) && obj.getSpecs().equals(specs) && obj.getGaming().equals(gaming)) {
                 
                 System.out.println("Удалён аксессуар:" + obj);
                 Accessories.Accessoriess.remove(obj);
@@ -193,7 +209,7 @@ public class ProductActions {
         parametersInput();
         read.skip("");
         for (Screen obj : Screen.Screens) {
-            if (obj.getName() == name && obj.getSpecs() == specs && obj.getGaming() == gaming) {
+            if (obj.getName().equals(name) && obj.getSpecs().equals(specs) && obj.getGaming().equals(gaming)) {
                 
                 System.out.println("Удалён монитор:" + obj);
                 Screen.Screens.remove(obj);
@@ -210,7 +226,7 @@ public class ProductActions {
         parametersInput();
         read.skip("");
         for (SpareParts obj : SpareParts.spareParts) {
-            if (obj.getName() == name && obj.getSpecs() == specs && obj.getGaming() == gaming) {
+            if (obj.getName().equals(name) && obj.getSpecs().equals(specs) && obj.getGaming().equals(gaming)) {
                 
                 System.out.println("Удалена запчасть или расходник:" + obj);
                 SpareParts.spareParts.remove(obj);
@@ -225,8 +241,7 @@ public class ProductActions {
         
         parametersInput();
         for (PC obj : PC.pcs) {
-            if (obj.getName() == name && obj.getSpecs() == specs && obj.getGaming() == gaming) {
-                
+            if (obj.getName().equals(name) && obj.getSpecs().equals(specs) && obj.getGaming().equals(gaming)) {
                 System.out.println("Введите новое название товара: ");
                 obj.setName(read.nextLine());
                 System.out.println("Введите новые параметры товара: ");
@@ -246,7 +261,7 @@ public class ProductActions {
         parametersInput();
         String gaming = read.nextLine();
         for (KeyboardMouse obj : KeyboardMouse.KeyboardMouses) {
-            if (obj.getName() == name && obj.getSpecs() == specs && obj.getGaming() == gaming) {
+            if (obj.getName().equals(name) && obj.getSpecs().equals(specs) && obj.getGaming().equals(gaming)) {
                 
                 System.out.println("Введите новое название товара: ");
                 obj.setName(read.nextLine());
@@ -266,7 +281,7 @@ public class ProductActions {
         parametersInput();
         String gaming = read.nextLine();
         for (Accessories obj : Accessories.Accessoriess) {
-            if (obj.getName() == name && obj.getSpecs() == specs && obj.getGaming() == gaming) {
+            if (obj.getName().equals(name) && obj.getSpecs().equals(specs) && obj.getGaming().equals(gaming)) {
                 System.out.println("Введите новое название товара: ");
                 obj.setName(read.nextLine());
                 System.out.println("Введите новые параметры товара: ");
@@ -285,7 +300,7 @@ public class ProductActions {
         parametersInput();
         String gaming = read.nextLine();
         for (Screen obj : Screen.Screens) {
-            if (obj.getName() == name && obj.getSpecs() == specs && obj.getGaming() == gaming) {
+            if (obj.getName().equals(name) && obj.getSpecs().equals(specs) && obj.getGaming().equals(gaming)) {
                 System.out.println("Введите новое название товара: ");
                 obj.setName(read.nextLine());
                 System.out.println("Введите новые параметры товара: ");
@@ -304,7 +319,7 @@ public class ProductActions {
         parametersInput();
         String gaming = read.nextLine();
         for (SpareParts obj : SpareParts.spareParts) {
-            if (obj.getName() == name && obj.getSpecs() == specs && obj.getGaming() == gaming) {
+            if (obj.getName().equals(name) && obj.getSpecs().equals(specs) && obj.getGaming().equals(gaming)) {
                 System.out.println("Введите новое название товара: ");
                 obj.setName(read.nextLine());
                 System.out.println("Введите новые параметры товара: ");

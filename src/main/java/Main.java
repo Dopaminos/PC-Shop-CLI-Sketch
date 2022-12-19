@@ -1,15 +1,17 @@
 import javax.xml.bind.annotation.*;
 import java.util.*;
+
+import javax.lang.model.element.ModuleElement.ProvidesDirective;
 import javax.xml.bind.*;
 import java.io.*;
 
-import static javax.xml.bind.JAXBContext.newInstance;
-
 @XmlRootElement
 public class Main {
-    static Scanner read = new Scanner(System.in);
+    static Scanner read;
 
     public static void main(String[] args) {
+
+        read = new Scanner(System.in);
 
         System.out.println("Меню компьютерного магазина");
         ProductActions menu = new ProductActions();
@@ -44,8 +46,13 @@ public class Main {
         ProductXML productXML;
         String filePath = "infoXMl.xml";
         try {
-            JAXBContext context = JAXBContext.newInstance(Main.class, PC.class, KeyboardMouse.class, Accessories.class,
-                    Screen.class, SpareParts.class, ProductXML.class);
+            JAXBContext context = JAXBContext.newInstance(
+                PC.class, 
+                KeyboardMouse.class, 
+                Accessories.class,
+                Screen.class, 
+                SpareParts.class,
+                ProductXML.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             productXML = (ProductXML) unmarshaller.unmarshal(new File(filePath));
         } catch (JAXBException e) {
